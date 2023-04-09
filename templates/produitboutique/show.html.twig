@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails produit-boutique{% endblock %}
+
+{% block body %}
+    <h1>Détails produit-boutique</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Nom du produit</th>
+                <td>{{ produitboutique.idProduit.nomProd }}</td>
+            </tr>
+             <tr>
+                <th>Nom de la boutique</th>
+                <td>{{ produitboutique.idBoutique.getNomBo() }}</td>
+            </tr>
+             <tr>
+                <th>la quantite existante dans le stocke de ce produite est :</th>
+                <td>{{ produitboutique.idProduit.getQuantiteProd() }}</td>
+            </tr>
+           
+            <tr>
+                <th>Quantite existantant dans cette boutique</th>
+                <td>{{ produitboutique.quantite }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ produitboutique.image }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_produitboutique_edit', {'id': produitboutique.id}) }}">Modifier</a>
+
+    {{ include('produitboutique/_delete_form.html.twig') }}
+
+    <a href="{{ path('app_produitboutique_index') }}">Retour à la liste</a>
+{% endblock %}
+

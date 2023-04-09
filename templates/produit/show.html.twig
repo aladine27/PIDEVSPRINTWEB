@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Affiche Produit{% endblock %}
+
+{% block body %}
+    <h1>Voici les details de ce Produit</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdProd</th>
+                <td>{{ produit.idProd }}</td>
+            </tr>
+            <tr>
+                <th>NomProd</th>
+                <td>{{ produit.nomProd }}</td>
+            </tr>
+            <tr>
+                <th>TypeProd</th>
+                <td>{{ produit.typeProd }}</td>
+            </tr>
+            <tr>
+                <th>QuantiteProd</th>
+                <td>{{ produit.quantiteProd }}</td>
+            </tr>
+            <tr>
+                <th>PrixuProd</th>
+                <td>{{ produit.prixuProd }}</td>
+            </tr>
+            <tr>
+                <th>CategorieProd</th>
+                <td>{{ produit.categorieProd }}</td>
+            </tr>
+            <tr>
+                <th>NomEvent</th>
+                <td>{{ produit.nomEvent }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_produit_index') }}">Precedent</a>
+
+    <a href="{{ path('app_produit_edit', {'idProd': produit.idProd}) }}">Modifier</a>
+
+    {{ include('produit/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Produitboutique</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+            <th>NomProduit</th>
+            <th>NomBoutique</th>
+            <th>Image</th>
+            <th>Quantité</th>
+            <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+               <tr>
+               
+        {% for produitboutique in produitboutiques %}
+            <tr>
+                <td>{{ produitboutique.id }}</td>
+                 {% if produitboutique.idProduit is not null %}
+                <td>{{ produitboutique.idProduit.nomProd }}</td>
+                 {% endif %}
+                {% if produitboutique.idBoutique is not null %}
+                    <td>{{ produitboutique.idBoutique.getNomBo() }}</td>
+               
+                {% endif %}
+                <td>{{ produitboutique.image }}</td>
+                <td>{{ produitboutique.quantite }}</td>
+                <td>
+                    <a href="{{ path('app_produitboutique_show', {'id': produitboutique.id}) }}">Voir</a>
+                    <a href="{{ path('app_produitboutique_edit', {'id': produitboutique.id}) }}">Modifier</a>
+                    {{ include('produitboutique/_delete_form.html.twig') }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Aucun produit de boutique trouvé.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_produitboutique_new') }}">Ajouter nouveau produit de boutique</a>
+{% endblock %}

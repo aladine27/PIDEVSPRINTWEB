@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Boutique{% endblock %}
+
+{% block body %}
+    <h1>Boutique</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdBo</th>
+                <td>{{ boutique.idBo }}</td>
+            </tr>
+            <tr>
+                <th>NomBo</th>
+                <td>{{ boutique.nomBo }}</td>
+            </tr>
+            <tr>
+                <th>AdresseBo</th>
+                <td>{{ boutique.adresseBo }}</td>
+            </tr>
+            <tr>
+                <th>LatB</th>
+                <td>{{ boutique.latB }}</td>
+            </tr>
+            <tr>
+                <th>LongB</th>
+                <td>{{ boutique.longB }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_boutique_index') }}">back to list</a>
+
+    <a href="{{ path('app_boutique_edit', {'idBo': boutique.idBo}) }}">edit</a>
+
+    {{ include('boutique/_delete_form.html.twig') }}
+{% endblock %}

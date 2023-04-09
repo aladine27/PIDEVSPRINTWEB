@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produit index{% endblock %}
+
+{% block body %}
+    <h1> voici la liste des produits existantes En Stocke</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdProd</th>
+                <th>NomProd</th>
+                <th>TypeProd</th>
+                <th>QuantiteProd</th>
+                <th>PrixuProd</th>
+                <th>CategorieProd</th>
+                <th>NomEvent</th>
+                <th>Les actions Dispo </th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for produit in produits %}
+            <tr>
+                <td>{{ produit.idProd }}</td>
+                <td>{{ produit.nomProd }}</td>
+                <td>{{ produit.typeProd }}</td>
+                <td>{{ produit.quantiteProd }}</td>
+                <td>{{ produit.prixuProd }}</td>
+                <td>{{ produit.categorieProd }}</td>
+                <td>{{ produit.nomEvent }}</td>
+                <td>
+                    <a href="{{ path('app_produit_show', {'idProd': produit.idProd}) }}">afficher</a>
+                    <a href="{{ path('app_produit_edit', {'idProd': produit.idProd}) }}">modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">il n'existe pas de produits dans la base </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_produit_new') }}">ajouter un nouveau produit</a>
+{% endblock %}
