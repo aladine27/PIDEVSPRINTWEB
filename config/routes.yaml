@@ -1,3 +1,10 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+app_event_show:
+    path: /event/{nom_event<.*>}
+    controller: App\Controller\EventController::show
+
+
+
+

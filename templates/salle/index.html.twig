@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Salle index{% endblock %}
+
+{% block body %}
+    <div class ="row" style="display: flex;align-items: center;justify-content: center;margin-top: 150px;">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">SALLE LIST</h5>
+
+                    <!-- Search form -->
+                    <form method="get" action="{{ path('app_salle_index') }}" class="form-inline mb-3">
+                        <div class="form-group mr-2">
+                            <label for="nbreSalle" class="sr-only">N° Salle</label>
+                            <input type="number" class="form-control" id="nbreSalle" name="nbreSalle" placeholder="N° Salle" value="{{ app.request.query.get('nbreSalle') }}">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </form>
+
+                    <!-- Table with stripped rows -->
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nbre_salle</th>
+                                <th>Type_stuff</th>
+                                <th>Cin_stuff</th>
+                                <th>show</th>
+                                <th>edit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for salle in salles %}
+                            {% if not app.request.query.get('nbreSalle') or salle.nbreSalle == app.request.query.get('nbreSalle') %}
+                                <tr>
+                                    <td>{{ salle.nbreSalle }}</td>
+                                    <td>{{ salle.typeStuff }}</td>
+                                    <td>{{ salle.cinStuff }}</td>
+                                    <td>
+                                        <a class="btn btn-success" href="{{ path('app_salle_show', {'nbre_salle': salle.nbreSalle}) }}">show</a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-danger" href="{{ path('app_salle_edit', {'nbre_salle': salle.nbreSalle}) }}">edit</a>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                            {% else %}
+                                <tr>
+                                    <td colspan="5">no records found</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <a href="{{ path('app_salle_new') }}">Create new</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

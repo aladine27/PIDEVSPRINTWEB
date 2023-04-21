@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New SALLE{% endblock %}
+
+{% block body %}
+
+    <section class="section">
+      <div class="row">
+        <div style="display: flex;align-items: center;justify-content: center;margin-top: 150px;">
+<div class="col-lg-8"> 
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">ADD SALLE</h5>
+
+              <!-- General Form Elements -->
+              {{form_start(form)}}
+                
+                  <label for="inputText" class="col-sm-4 col-form-label">NUMERO SALLE</label>
+                  <div class="col-sm-10">
+                  {{form_widget(form.nbre_salle,{'attr':{'class':'form-control'}})}}
+                  
+                </div>
+                
+                  <label for="inputEmail" class="col-sm-4 col-form-label">TYPE STUFF</label>
+                  <div class="col-sm-10">
+                  {{ form_widget(form.type_stuff, {'attr': {'class': 'form-control'}, 'choices': {'Press': 'press', 'Femme de ménage': 
+                  'femme_de_menage', 'Designer': 'designer', 'Autre': 'autre'}, 'placeholder': 'Sélectionner une option'}) }}
+                  </div>
+
+
+                
+                
+                  <label for="inputPassword" class="col-sm-4 col-form-label">CIN STUFF</label>
+                  <div class="col-sm-10">
+                  {{form_widget(form.cin_stuff,{'attr':{'class':'form-control'}})}}
+                 
+                </div>
+                
+                
+                </div>
+                
+                  
+                
+                  
+                {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+    <a href="{{ path('app_salle_index') }}">back to list</a>
+
+               
+
+                
+
+            {{ form_end(form) }}<!-- End General Form Elements -->
+
+            </div>
+          </div>
+
+        </div>
+               </div>
+
+        
+      </div>
+    </section>
+{% endblock %}

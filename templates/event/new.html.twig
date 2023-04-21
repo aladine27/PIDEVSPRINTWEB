@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Event{% endblock %}
+
+{% block body %}
+
+    <section class="section">
+      <div class="row">
+        <div style="display: flex;align-items: center;justify-content: center;margin-top: 150px;">
+<div class="col-lg-8"> 
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">ADD EVENT</h5>
+
+              <!-- General Form Elements -->
+              {{form_start(form)}}
+                
+                  <label for="inputText" class="col-sm-4 col-form-label">NOM EVENT</label>
+                  <div class="col-sm-10">
+                  {{form_widget(form.nom_event,{'attr':{'class':'form-control'}})}}
+                  
+                </div>
+                
+                  <label for="inputEmail" class="col-sm-4 col-form-label">TYPE EVENT</label>
+                  <div class="col-sm-10">
+                    {{form_widget(form.type_event,{'attr':{'class':'form-control'}})}}
+                
+                </div>
+                
+                  <label for="inputPassword" class="col-sm-4 col-form-label">NUMERO DE SALLE</label>
+                  <div class="col-sm-10">
+                  {{form_widget(form.nbre_salle,{'attr':{'class':'form-control'}})}}
+                 
+                </div>
+                
+                
+                </div>
+                
+                  <label for="inputDate" class="col-sm-4 col-form-label">DATE DEBUT</label>
+                  <div class="col-sm-10">
+                    {{form_widget(form.date_deb,{'att':{'class':'form-control'}})}}
+                
+                  </div>
+               
+                  <label for="inputDate" class="col-sm-4 col-form-label">DATE FIN</label>
+                  <div class="col-sm-10">
+                    {{form_widget(form.date_fin,{'att':{'class':'form-control'}})}}
+                      {{form_errors(form.date_fin)}}
+                </div>
+                
+                  <label for="inputEmail" class="col-sm-4 col-form-label">NBR PARTICIPANTS</label>
+                  <div class="col-sm-10">
+                  {{form_widget(form.nbr_participants,{'attr':{'class':'form-control'}})}}
+                  </div>
+                {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+    <a href="{{ path('app_event_index') }}">back to list</a>
+
+               
+
+                
+
+            {{ form_end(form) }}<!-- End General Form Elements -->
+
+            </div>
+          </div>
+
+        </div>
+               </div>
+
+        
+      </div>
+    </section>
+{% endblock %}
