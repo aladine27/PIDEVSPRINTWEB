@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tableau des Events</title>
+  </head>
+  <body>
+    <h2 style="text-align: center">Tableau des evenements</h2>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Nom_event</th>
+          <th>Type_event</th>
+          <th>Nbre_salle</th>
+          <th>Date_deb</th>
+          <th>Date_fin</th>
+          <th>Nbr_participants</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for event in b %}
+        <tr>
+          <td>{{ event.nomEvent }}</td>
+          <td>{{ event.typeEvent }}</td>
+          <td>{{ event.nbreSalle }}</td>
+          <td>{{ event.dateDeb ? event.dateDeb|date('Y-m-d') : '' }}</td>
+          <td>{{ event.dateFin ? event.dateFin|date('Y-m-d') : '' }}</td>
+          <td>{{ event.nbrParticipants }}</td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="5">no records found</td>
+        </tr>
+
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>

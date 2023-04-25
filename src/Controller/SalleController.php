@@ -14,13 +14,25 @@ use Symfony\Component\Routing\Annotation\Route;
 class SalleController extends AbstractController
 {
     #[Route('/', name: 'app_salle_index', methods: ['GET'])]
-    public function index(SalleRepository $salleRepository): Response
+    public function index(Request $request, SalleRepository $salleRepository): Response
     {
+        $sort_by_nbre_salle = $request->query->get('sort_by_nbre_salle');
+        $salles = $salleRepository->findAll();
+    
+        if ($sort_by_nbre_salle) {
+            usort($salles, function ($a, $b) {
+                return $a->getNbreSalle() <=> $b->getNbreSalle();
+            });
+        }
+    
         return $this->render('salle/index.html.twig', [
-            'salles' => $salleRepository->findAll(),
+            'salles' => $salles,
         ]);
     }
+    
 
+
+ 
     #[Route('/new', name: 'app_salle_new', methods: ['GET', 'POST'])]
     public function new(Request $request, SalleRepository $salleRepository): Response
     {

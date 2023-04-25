@@ -21,6 +21,24 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
+    public function search($mots){
+        $query = $this->createQueryBuilder('a');
+        if($mots != null){
+            $query->Where('MATCH_AGAINST(a.nom_event, a.type_event) AGAINST (:mots boolean)>0')
+                ->setParameter('mots', $mots);
+        }
+        return $query->getQuery()->getResult();
+    }
+    public function findAllOrderedByCreatedAt()
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
     public function save(Event $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);

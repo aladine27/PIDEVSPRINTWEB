@@ -1,0 +1,65 @@
+{% extends 'base_front.html.twig' %}
+{% block body %}
+
+	<div class="testinonials-area bg-color ptb-100">
+		<div class="container">
+			<div class="section-title">
+				
+<a></a>export all events  :       <a class="btn px-3 mt-auto mx-auto" href="{{path('pdf') }}">export pdf</a></a>
+			</div>
+			
+
+			<div class="row">
+				{% for event in events %}
+					<div class="col-lg-4 col-md-6">
+						<div class="blog-card">
+							<div class="blog-img">
+
+								<div class="caption">
+									<h4>{{ event.dateDeb ? event.dateDeb|date('F')}}</h4>
+									<p>{{ event.dateDeb ? event.dateDeb|date('d') : '' }}</p>
+								</div>
+							</div>
+							<div class="blog-text">
+								<h3>
+									<a>{{ event.nomEvent }}</a>
+								</h3>
+								<p>{{ event.typeEvent }}</p>
+
+							</div>
+						</div>
+
+
+					</div>
+				</br>
+			{% else %}
+				<div>no records found</div>
+			{% endfor %}
+
+
+			<div class="col-lg-12 col-md-12">
+				<ul class="pagination">
+					<li class="page-item active">
+						<a class="page-link" href="#">1</a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="#">2</a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="#">3</a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="#">4</a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="#" aria-label="Next">
+							<span aria-hidden="true">»</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	
+</div>{% endblock %}

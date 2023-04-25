@@ -6,6 +6,8 @@ use App\Repository\EventRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+#[ORM\Index(name: 'event', columns: ['nom_event', 'type_event'], flags: ['fulltext'])]
+
 #[ORM\Entity(repositoryClass: EventRepository::class)]
 class Event
 {

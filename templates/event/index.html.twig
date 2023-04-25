@@ -1,67 +1,125 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_back.html.twig' %}
 
-{% block title %}Event index{% endblock %}
+{% block title %}Event index
+{% endblock %}
 
 {% block body %}
-   
-  
 
-   <div class ="row" style="display: flex;align-items: center;justify-content: center;margin-top: 150px;">
-   <div class="col-lg-8"> 
-   <div class="card">
-  <div class="card-body">
-              <h5 class="card-title">EVENTS LIST</h5>
 
-              <!-- Table with stripped rows -->
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                     <th>Nom_event</th>
-                <th>Type_event</th>
-                <th>Nbre_salle</th>
-                <th>Date_deb</th>
-                <th>Date_fin</th>
-                <th>Nbr_participants</th>
-                <th>show</th>
-                <th>edit</th>
-                  </tr>
-                </thead>
-                <tbody>
-                 {% for event in events %}
-            <tr>
-                <td>{{ event.nomEvent }}</td>
-                <td>{{ event.typeEvent }}</td>
-                <td>{{ event.nbreSalle }}</td>
-                <td>{{ event.dateDeb ? event.dateDeb|date('Y-m-d') : '' }}</td>
-                <td>{{ event.dateFin ? event.dateFin|date('Y-m-d') : '' }}</td>
-                <td>{{ event.nbrParticipants }}</td>
-                <td>
-                    <a class="btn btn-success" href="{{ path('app_event_show', {'nom_event': event.nomEvent}) }}">show</a>
-                    </td>
-                    <td>
+	<main id="main" class="main">
 
-                    <a class="btn btn-danger" href="{{ path('app_event_edit', {'nom_event': event.nomEvent}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        
 
-        {% endfor %}
-                </tbody>
-              </table>
-      <a href="{{ path('app_event_new') }}">Create new</a>
-      <form action="{{ path('app_event_index') }}" method="get">
-    <button type="submit" name="sort_by_nom_event" value="1">Trier</button>
-    <a href="{{ path('app_event_index') }}">return</a>
-</form>
+		<div class="search-bar">
 
-            </div>
-    </div>
-    </div>
- </div>
-     
-  
-   {% endblock %}
+			{{form_start(form,{'attr':{'class':'search-form d-flex align-items-center'}})}}
+
+			{{form_widget(form.mots)}}
+			{{form_widget(form.Rechercher)}}<i class="bi bi-search"></i>
+
+			{{form_end(form)}}
+		</div>
+		<!-- End Search Bar -->
+
+		<section class="section">
+			<div class="row">
+				<div class="col-lg-612">
+
+
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title">Event Table</h5>
+
+							export all events  :       <a class="btn px-3 mt-auto mx-auto" href="{{path('pdf') }}">export pdf</a>
+
+							<!-- Table with stripped rows -->
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<th>Nom_event</th>
+										<th>Type_event</th>
+										<th>Nbre_salle</th>
+										<th>Date_deb</th>
+										<th>Date_fin</th>
+										<th>Nbr_participants</th>
+										<th>show</th>
+										<th>edit</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for event in events %}
+										<tr>
+											<td>{{ event.nomEvent }}</td>
+											<td>{{ event.typeEvent }}</td>
+											<td>{{ event.nbreSalle }}</td>
+											<td>{{ event.dateDeb ? event.dateDeb|date('Y-m-d') : '' }}</td>
+											<td>{{ event.dateFin ? event.dateFin|date('Y-m-d') : '' }}</td>
+											<td>{{ event.nbrParticipants }}</td>
+											<td>
+												<a class="btn btn-success" href="{{ path('app_event_show', {'nom_event': event.nomEvent}) }}">show</a>
+											</td>
+											<td>
+
+												<a class="btn btn-danger" href="{{ path('app_event_edit', {'nom_event': event.nomEvent}) }}">edit</a>
+											</td>
+										</tr>
+									{% else %}
+										<tr>
+											<td colspan="5">no records found</td>
+										</tr>
+
+
+									{% endfor %}
+								</tbody>
+							</table>
+							<a href="{{ path('app_event_new') }}">Create new</a>
+							<form action="{{ path('app_event_index') }}" method="get">
+								<!-- <button type="submit" name="sort_by_nom_event" value="1">Trier</button> -->
+							
+								<!-- <a href="{{ path('app_event_index') }}">return</a> -->
+							</form>
+						</div>
+					</div>
+
+
+				</div>
+
+
+			</div>
+		</section>
+
+	</main>
+
+	<nav aria-label="Page navigation example">
+		<ul class="pagination justify-content-center">
+			{% if currentPage > 1 %}
+				<li class="page-item">
+					<a hidden class="page-link" href="{{ path('app_event_index', { 'page': currentPage - 1 }) }}">Précédent</a>
+					<a class="page-link" href="{{ path('app_event_index', { 'page': currentPage - 1 }) }}" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+						<span class="sr-only">Previous</span>
+					</a>
+				</li>
+			{% endif %}
+			{% for page in 1..pagesCount %}
+				{% if page == currentPage %}
+					<li class="page-item active">
+						<span class="page-link">{{ page }}</span>
+					</li>
+				{% else %}
+					<li class="page-item">
+						<a class="page-link" href="{{ path('app_event_index', {'page': page}) }}">{{ page }}</a>
+					</li>
+				{% endif %}
+			{% endfor %}
+			{% if currentPage < pagesCount %}
+				<li class="page-item">
+					<a hidden class="page-link" href="{{ path('app_event_index', { 'page': currentPage + 1 }) }}">Next</a>
+					<a class="page-link" href="{{ path('app_event_index', { 'page': currentPage + 1 }) }}" aria-label="Next">
+						<span aria-hidden="true">&raquo;</span>
+						<span class="sr-only">Next</span>
+					</a>
+				</li>
+			{% endif %}
+		</ul>
+	</nav>
+{% endblock %}
